@@ -1,46 +1,67 @@
 # Submission pack
 
-Everything the [Build What Moves India](https://buildwhatmovesindia.com/brief) form
-asks for. Deadline: **28 August 2026, 20:00 IST — no grace period.**
+Deadline: **28 August 2026, 20:00 IST — no grace period.**
+
+## Where this gets submitted
+
+The **Project Submission form has not been sent yet.** The registration confirmation
+(21 Aug) says: *"Submissions close August 28, 2026 at 8:00 PM IST. We'll email you
+the details."*
+
+- **"Apply Now" on the site is Registration only** — name, email, WhatsApp, age,
+  solo/team, profession, finale attendance. No fields for the link, video or
+  summary. Already completed.
+- The FAQ confirms two separate forms: *"Each teammate must enter the other
+  person's registered email in the Project Submission form."*
+- Watch **siddharthpadwal3@gmail.com** and the
+  [WhatsApp Channel](https://whatsapp.com/channel/0029VbDbaoSGOj9kXqHBow0W).
+  Use the registered email everywhere — entries are tracked by it and cannot be
+  moved to another address.
 
 ## Checklist
 
+- [x] **Registered** (21 Aug, confirmation received)
 - [x] **Live public link, no access request** — https://sid3github.github.io/railsathi/
-- [x] **Mock login credentials** — none needed; there is no login anywhere in the journey
-- [x] **Complete citizen journey, start to finish** — three of them (rebook, refund, callback)
-- [x] **Synthetic data** for everything a real system would hold
+- [x] **Mock login credentials** — none needed; there is no login in the journey
+- [x] **Complete citizen journey** — three of them, each ending in a resolved outcome
+- [x] **Synthetic data** everywhere a real system would hold personal information
 - [x] **Built with Codex**
-- [ ] **Project summary under 250 words** — draft below, paste into the form
+- [x] **Project summary under 250 words** — 247 words, below
 - [ ] **Video, max 2 minutes** — shot list below, you record
+- [ ] **Partner's registered email** — leave blank if solo
+- [ ] **Submit** once the form arrives
 
 ---
 
-## Project summary (232 words)
+## Project summary (247 words)
 
 **RailSathi — a clear next step when an Indian rail journey is disrupted.**
 
-When a train is cancelled today, the passenger gets a status message and a portal
-built for record-keeping rather than for deciding. They are on a platform, on a
-phone, with a deadline, and the work of figuring out what to do next is entirely
-theirs.
+When a train is cancelled the passenger gets a terse SMS and a portal built for
+record-keeping, not deciding — on a platform, on a phone, with a deadline.
 
-RailSathi turns that same disruption into a decision. It says what changed in
-plain language, then lays out three honest paths — rebook onto another train,
-take the fare back, or ask a person to call — with the cost, the timing and the
-trade-off of each stated before any commitment. Every path finishes somewhere
-real: a confirmed seat, a tracked refund with dates, or a booked callback.
+RailSathi turns the disruption into a decision. It says what changed in plain
+language, then offers three honest paths — rebook, take the fare back, or ask a
+person to call — each with its cost and timing stated before any commitment.
+Every path ends somewhere real.
 
-Why it is easier than the experience it replaces:
+Why it is easier: one decision per screen, in the passenger's words; complete
+Hindi rather than a token toggle; a 268 kB first load built for a mid-range phone
+on a slow connection; WCAG AA contrast throughout with 44px touch targets; and no
+login, OTP or payment ever requested.
 
-- One decision per screen, in the passenger's words rather than railway vocabulary.
-- Hindi that actually works — all 178 strings, not a token toggle.
-- A 268 kB first load from a single origin, down from 1.24 MB across three.
-- Measured accessibility: every text node clears WCAG AA contrast in both
-  languages, with 44 px touch targets and full keyboard support.
-- Nothing dead-ends, and no login, OTP or payment detail is ever requested.
+Beyond the interface, this is an event-driven layer over existing railway systems,
+not a new booking stack. It would subscribe to cancellation events, match them to
+booked PNRs, and push a signed one-time link over SMS and WhatsApp, so the
+passenger never goes looking. Alternatives are computed once per disrupted train
+and cached, because everyone on that train needs the same answer.
 
-All journey data is synthetic and labelled as a demonstration. Independent, and
-not affiliated with Indian Railways or IRCTC.
+Honestly mocked: all journey data, availability and refunds. Holding a seat needs
+reservation write access, refunds would report the railway's existing automatic
+process rather than move money, and the open PNR field here becomes a signed link
+in production.
+
+Independent prototype, unaffiliated with Indian Railways or IRCTC.
 
 ---
 
@@ -60,14 +81,20 @@ makes the responsive work visible for free.
 | 0:45–0:52 | Confirmation: seat, refund tracker, share. | "A confirmed seat, her refund already tracked, and one tap to send the plan to whoever is waiting." |
 | 0:52–1:00 | **Tap हि.** Let the whole page turn to Hindi. Scroll a little. | "And the whole thing is in Hindi — every screen, not a token toggle." |
 
-### Minute two — how it was built
+### Minute two — how it was built, and how it would really work
+
+The brief scores *end-to-end thinking* ("does the solution address the backend,
+infrastructure and processes, not just the interface?") and *honesty*
+("are limitations, mock data and dependencies clearly disclosed?"). The last two
+rows are there to answer both directly — don't cut them for time.
 
 | Time | On screen | Say |
 | --- | --- | --- |
 | 1:00–1:12 | Repo tree, or the Codex session. | "Codex built this — the journey structure, the screens, the design system, and the original hero art." |
-| 1:12–1:28 | Network panel, or the before/after numbers. | "It started at 1.24 MB across three origins. The hero alone was 1.12 MB. It's now 268 kB from one origin, seven requests, nothing third-party in front of first paint." |
-| 1:28–1:44 | Contrast audit output, or tab through the train chooser with visible focus rings. | "Accessibility is measured, not claimed: 308 text nodes clearing WCAG AA in both languages, a real radio group, a dialog that traps and restores focus." |
-| 1:44–2:00 | `npm test` output, then the live URL. | "59 tests run in CI before anything deploys — including one guarding the refund path, which used to send people to a list of trains instead of their money. Three journeys, all of them finish." |
+| 1:12–1:24 | Network panel, or the before/after numbers. | "It started at 1.24 MB across three origins. The hero alone was 1.12 MB. It's now 268 kB from one origin, seven requests, nothing third-party in front of first paint." |
+| 1:24–1:36 | Tab through the train chooser so the focus rings show. | "Accessibility is measured, not claimed: every text node clears WCAG AA in both languages, and 22 browser tests hold it there." |
+| 1:36–1:50 | Talk over the options screen, or a simple arrow sketch. | "At scale this isn't a new booking stack — it's an event-driven layer on top of the railway's own systems. Subscribe to cancellation events, match booked PNRs, push a signed link over SMS and WhatsApp so nobody has to go looking. One cancelled train is a thousand passengers needing the same answer, so alternatives are computed once and cached." |
+| 1:50–2:00 | The **synthetic data** pill, visible on screen. | "Everything here is mocked, and labelled as mocked. Holding a seat would need reservation write access; refunds would report the railway's existing automatic process, not move money. That's the honest boundary between what works today and what needs a partnership." |
 
 ### Worth avoiding
 

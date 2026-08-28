@@ -54,6 +54,49 @@ has a 44 px touch target, and `prefers-reduced-motion` is honoured.
 **Nothing dead-ends.** No `alert()` stubs, no buttons that go nowhere. Sharing
 uses the platform share sheet with a clipboard fallback.
 
+## How this would work beyond the prototype
+
+RailSathi is deliberately not a new booking stack. At scale it is a thin,
+event-driven layer over systems the railway already runs.
+
+**The trigger is the product.** Today a passenger finds out by SMS and is then
+left to work it out. The useful version subscribes to cancellation and delay
+events, matches them against booked PNRs, and pushes a link the moment the
+disruption is known. Pull becomes push; the passenger never goes looking.
+
+**Reach means SMS and WhatsApp, not an app.** The brief's user is on a mid-range
+phone on a slow connection. There is no app to install here, and the plan should
+arrive on the channel people already read.
+
+**The load is bursty and correlated.** One cancelled Rajdhani is roughly a
+thousand people needing the identical answer within minutes; fog season is tens
+of thousands. So alternatives are computed once per disrupted train and cached,
+not recomputed per passenger. The read path is almost entirely cacheable, which
+is what makes this cheap to run.
+
+**Identity should be the link, not the PNR.** A PNR carries names, ages and seat
+numbers, so an open lookup field is the wrong door. In production the entry point
+is a signed, expiring, single-use link sent to the registered mobile. The open
+field in this prototype exists so a reviewer can walk in without credentials, and
+would not ship as-is.
+
+**Languages are a dictionary, not a rewrite.** Adding one is a single typed file;
+the build fails on a missing key rather than silently serving English.
+
+### What would need a partnership, and what would not
+
+| Capability | Status here | What the real version needs |
+| --- | --- | --- |
+| Explaining the disruption | Works | A verified reason feed rather than fixed copy |
+| Showing alternatives | Mocked | Read access to live availability |
+| Holding and rebooking a seat | Mocked | Reservation **write** access — the hardest dependency, and the one with no self-serve equivalent today for a cancelled train |
+| Refund | Mocked | Mostly reporting: the railway already refunds cancelled e-tickets automatically. RailSathi's job is making that legible, not moving money |
+| Callback | Mocked | Routing into an existing support desk |
+
+The honest summary: the explaining and deciding layer is buildable now against
+read-only data. Anything that changes a booking needs a sanctioned integration —
+which is a partnership question, not an engineering one.
+
 ## Built with Codex
 
 Codex wrote this prototype — the journey structure, the screens, the design
