@@ -1,13 +1,19 @@
 import { ArrowRight, CircleHelp, HeartHandshake, MoveRight, ShieldCheck } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
-import heroTrain from '../assets/indian-express-hero-v2.png'
+import trainAvif1600 from '../assets/hero/train-1600.avif'
+import trainAvif900 from '../assets/hero/train-900.avif'
+import trainWebp1600 from '../assets/hero/train-1600.webp'
+import trainWebp900 from '../assets/hero/train-900.webp'
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
 import { trip } from '../data/journey'
 import { useTranslation } from '../i18n/useTranslation'
 import { formatPnr, validatePnr } from '../lib/pnr'
 import { useJourney } from '../state/useJourney'
+
+/** Matches the rendered width of .hero-train so the browser picks the smaller file on phones. */
+const HERO_SIZES = '(max-width: 620px) 630px, min(835px, 67vw)'
 
 export function HomeScreen() {
   const { t, number } = useTranslation()
@@ -98,7 +104,27 @@ export function HomeScreen() {
               <span>{trip.to}</span>
               <small>{t('format.tonightDistance', { km: number(trip.distanceKm) })}</small>
             </div>
-            <img className="hero-train" src={heroTrain} alt="" width={1774} height={887} />
+            <picture>
+              <source
+                type="image/avif"
+                srcSet={`${trainAvif900} 900w, ${trainAvif1600} 1600w`}
+                sizes={HERO_SIZES}
+              />
+              <source
+                type="image/webp"
+                srcSet={`${trainWebp900} 900w, ${trainWebp1600} 1600w`}
+                sizes={HERO_SIZES}
+              />
+              <img
+                className="hero-train"
+                src={trainWebp1600}
+                alt=""
+                width={1774}
+                height={887}
+                fetchPriority="high"
+                decoding="async"
+              />
+            </picture>
           </div>
         </section>
 

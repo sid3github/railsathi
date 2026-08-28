@@ -7,6 +7,11 @@ import { LanguageProvider } from './i18n/LanguageProvider'
 import { ErrorScreen } from './screens/ErrorScreen'
 import { JourneyProvider } from './state/JourneyProvider'
 import { router } from './router'
+import '@fontsource-variable/dm-sans/standard.css'
+import '@fontsource/dm-mono/latin-400.css'
+// Devanagari is last in every font stack, so unicode-range means this only
+// downloads when Hindi is actually on screen.
+import '@fontsource-variable/noto-sans-devanagari/wght.css'
 import './index.css'
 import './App.css'
 
