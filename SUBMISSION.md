@@ -15,7 +15,7 @@ asks for. Deadline: **28 August 2026, 20:00 IST — no grace period.**
 
 ---
 
-## Project summary (231 words)
+## Project summary (232 words)
 
 **RailSathi — a clear next step when an Indian rail journey is disrupted.**
 
@@ -34,7 +34,7 @@ Why it is easier than the experience it replaces:
 
 - One decision per screen, in the passenger's words rather than railway vocabulary.
 - Hindi that actually works — all 178 strings, not a token toggle.
-- A ~209 kB first load, built for a mid-range phone on a slow connection.
+- A 268 kB first load from a single origin, down from 1.24 MB across three.
 - Measured accessibility: every text node clears WCAG AA contrast in both
   languages, with 44 px touch targets and full keyboard support.
 - Nothing dead-ends, and no login, OTP or payment detail is ever requested.
@@ -65,7 +65,7 @@ makes the responsive work visible for free.
 | Time | On screen | Say |
 | --- | --- | --- |
 | 1:00–1:12 | Repo tree, or the Codex session. | "Codex built this — the journey structure, the screens, the design system, and the original hero art." |
-| 1:12–1:28 | Network panel, or the before/after numbers. | "It started at 1.25 MB. The hero alone was 1.12 MB. It's now a 209 kB first load — 22 kB of hero, and no third-party font request in front of first paint." |
+| 1:12–1:28 | Network panel, or the before/after numbers. | "It started at 1.24 MB across three origins. The hero alone was 1.12 MB. It's now 268 kB from one origin, seven requests, nothing third-party in front of first paint." |
 | 1:28–1:44 | Contrast audit output, or tab through the train chooser with visible focus rings. | "Accessibility is measured, not claimed: 308 text nodes clearing WCAG AA in both languages, a real radio group, a dialog that traps and restores focus." |
 | 1:44–2:00 | `npm test` output, then the live URL. | "59 tests run in CI before anything deploys — including one guarding the refund path, which used to send people to a list of trains instead of their money. Three journeys, all of them finish." |
 

@@ -39,10 +39,12 @@ persists, and `<html lang>` follows it. `hi.ts` is typed as a complete
 English in front of someone who chose Hindi. Devanagari gets its own leading and
 tracking, because the Latin display setting crowds matras.
 
-**Built for a slow connection.** First load is ~209 kB. The hero is AVIF/WebP at
-two widths, so a phone pulls 22 kB rather than the 1.12 MB PNG this started with.
-Fonts are self-hosted, so no third-party origin sits in front of first paint. The
-Devanagari font only downloads if Hindi is actually chosen.
+**Built for a slow connection.** First load is **268 kB across 7 requests, all
+from one origin** — measured on the live build, not estimated. It started at
+about 1.24 MB across three origins. The hero was 1.12 MB of that; it is now
+AVIF/WebP at two widths behind `<picture>`, down to 50 kB at the size a 2x phone
+actually needs. Fonts are self-hosted, so no third-party request sits in front of
+first paint, and the 118 kB Devanagari face only downloads if Hindi is chosen.
 
 **Accessible by measurement, not by assertion.** All 308 text nodes across nine
 routes clear WCAG AA contrast in both languages. Train selection is a real radio
