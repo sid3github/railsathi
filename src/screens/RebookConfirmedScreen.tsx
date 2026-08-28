@@ -46,7 +46,7 @@ export function RebookConfirmedScreen() {
             </span>
             <BadgeCheck size={22} aria-hidden="true" />
           </div>
-          <h3>{t(train.nameKey)}</h3>
+          <h2>{t(train.nameKey)}</h2>
           <div className="journey-times">
             <div>
               <b>{train.departure}</b>
@@ -84,7 +84,7 @@ export function RebookConfirmedScreen() {
             </span>
             <CheckCircle2 size={21} aria-hidden="true" />
           </div>
-          <h3>{t('refund.onItsWay', { amount: currency(trip.farePaid) })}</h3>
+          <h2>{t('refund.onItsWay', { amount: currency(trip.farePaid) })}</h2>
           <p>{t('refund.initiated')}</p>
           <RefundTracker />
           <Link className="text-button" to="/journey/refund/confirmed">

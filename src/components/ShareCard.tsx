@@ -45,7 +45,7 @@ export function ShareCard() {
         <UsersRound />
       </div>
       <div>
-        <h3>{t('confirmed.share.title')}</h3>
+        <h2>{t('confirmed.share.title')}</h2>
         <p>{t('confirmed.share.body')}</p>
       </div>
       <button type="button" className="secondary-button" onClick={share}>

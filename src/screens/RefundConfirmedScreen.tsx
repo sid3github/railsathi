@@ -28,7 +28,7 @@ export function RefundConfirmedScreen() {
           </span>
           <CheckCircle2 size={21} aria-hidden="true" />
         </div>
-        <h3>{t('refund.onItsWay', { amount: currency(trip.farePaid) })}</h3>
+        <h2>{t('refund.onItsWay', { amount: currency(trip.farePaid) })}</h2>
         <p>{t('refund.initiated')}</p>
         <RefundTracker />
       </article>

@@ -100,7 +100,7 @@ export function RebookScreen() {
           </span>
           <div>
             <p className="overline">{t('rebook.panel.overline')}</p>
-            <h3>{t('rebook.panel.title')}</h3>
+            <h2>{t('rebook.panel.title')}</h2>
           </div>
         </div>
 

@@ -13,9 +13,9 @@ export function TripSummary() {
       <div className="trip-head">
         <div>
           <p className="overline">{t('trip.overline')}</p>
-          <h2>
+          <p className="trip-title">
             {trip.trainNumber} · {t(trip.trainNameKey)}
-          </h2>
+          </p>
         </div>
         <span className="live-chip">
           <i aria-hidden="true" /> {t('trip.updateChip')}

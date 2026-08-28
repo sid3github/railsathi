@@ -27,12 +27,12 @@ export function CallbackConfirmedScreen() {
           </span>
           <Check size={21} aria-hidden="true" />
         </div>
-        <h3>
+        <h2>
           {t('callback.confirmed.detail', {
             time: t(`callback.time.${callback.time}`).toLowerCase(),
             language: t(`callback.language.${callback.language}`),
           })}
-        </h3>
+        </h2>
         <p>{t('callback.confirmed.nothing')}</p>
         <p className="warning-row safe-row">
           <ShieldCheck size={18} aria-hidden="true" />

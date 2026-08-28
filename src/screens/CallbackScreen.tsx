@@ -31,7 +31,7 @@ export function CallbackScreen() {
           </span>
           <div>
             <p className="overline">{t('callback.overline')}</p>
-            <h3>{t('callback.panelTitle')}</h3>
+            <h2>{t('callback.panelTitle')}</h2>
           </div>
         </div>
 

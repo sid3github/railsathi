@@ -27,7 +27,7 @@ export function RefundScreen() {
           </span>
           <div>
             <p className="overline">{t('refund.overline')}</p>
-            <h3>{t('refund.summary.title')}</h3>
+            <h2>{t('refund.summary.title')}</h2>
           </div>
         </div>
 
