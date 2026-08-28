@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { copyFileSync, existsSync } from 'node:fs'
 import { resolve } from 'node:path'
 import react from '@vitejs/plugin-react'
@@ -29,5 +30,12 @@ export default defineConfig({
   plugins: [react(), spaFallback()],
   server: {
     port: process.env.PORT ? Number(process.env.PORT) : 5173,
+  },
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: ['./src/test/setup.ts'],
+    css: false,
+    include: ['src/**/*.test.{ts,tsx}'],
   },
 })
