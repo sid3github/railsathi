@@ -27,4 +27,7 @@ function spaFallback(): Plugin {
 export default defineConfig({
   base: process.env.VITE_BASE ?? '/railsathi/',
   plugins: [react(), spaFallback()],
+  server: {
+    port: process.env.PORT ? Number(process.env.PORT) : 5173,
+  },
 })
