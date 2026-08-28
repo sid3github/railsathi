@@ -1,24 +1,34 @@
 /// <reference types="vitest/config" />
-import { copyFileSync, existsSync } from 'node:fs'
-import { resolve } from 'node:path'
+import { copyFileSync, existsSync, mkdirSync } from 'node:fs'
+import { dirname, resolve } from 'node:path'
 import react from '@vitejs/plugin-react'
 import { defineConfig, type Plugin } from 'vite'
+import { ROUTE_PATHS } from './src/routeManifest.ts'
 
-// GitHub Pages serves project sites from a subpath and has no SPA rewrite rule,
-// so a deep link like /railsathi/journey/refund would 404. Serving a copy of
-// index.html as 404.html lets the router boot and resolve the path client-side.
-function spaFallback(): Plugin {
+// GitHub Pages has no SPA rewrite rule, so a deep link would fall through to
+// 404.html and be served with a 404 status. The route set is known and fixed, so
+// the build emits a real index.html at each path — every shared link gets a 200.
+// 404.html still covers genuinely unknown paths.
+function staticRoutes(): Plugin {
   let outDir = 'dist'
   return {
-    name: 'railsathi-spa-fallback',
+    name: 'railsathi-static-routes',
     apply: 'build',
     configResolved(config) {
       outDir = config.build.outDir
     },
     closeBundle() {
-      const index = resolve(process.cwd(), outDir, 'index.html')
-      if (existsSync(index)) {
-        copyFileSync(index, resolve(process.cwd(), outDir, '404.html'))
+      const root = resolve(process.cwd(), outDir)
+      const index = resolve(root, 'index.html')
+      if (!existsSync(index)) return
+
+      copyFileSync(index, resolve(root, '404.html'))
+
+      for (const path of ROUTE_PATHS) {
+        if (path === '/') continue
+        const target = resolve(root, `.${path}`, 'index.html')
+        mkdirSync(dirname(target), { recursive: true })
+        copyFileSync(index, target)
       }
     },
   }
@@ -27,7 +37,7 @@ function spaFallback(): Plugin {
 // https://vite.dev/config/
 export default defineConfig({
   base: process.env.VITE_BASE ?? '/railsathi/',
-  plugins: [react(), spaFallback()],
+  plugins: [react(), staticRoutes()],
   server: {
     port: process.env.PORT ? Number(process.env.PORT) : 5173,
   },
