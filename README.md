@@ -71,7 +71,8 @@ npm run dev
 | Script | What it does |
 | --- | --- |
 | `npm run dev` | Start the dev server |
-| `npm test` | Run the test suite |
+| `npm test` | Run the unit and integration suite |
+| `npm run test:e2e` | Run the Playwright layout and accessibility suite |
 | `npm run build` | Type-check and build to `dist/` |
 | `npm run preview` | Serve the production build locally |
 | `npm run lint` | Run Oxlint |
@@ -79,11 +80,29 @@ npm run dev
 
 ## Tests
 
-59 tests via Vitest and Testing Library, run in CI ahead of the build so a broken
-journey cannot deploy. They assert what a visitor actually does: each journey
-reaching a resolved outcome, every screen rendering standalone, PNR validation,
-the radio group's keyboard behaviour, the dialog's focus handling, and key and
-placeholder parity between the two dictionaries.
+Two suites, both run in CI ahead of the build so a regression cannot deploy.
+
+**Unit and integration — 68 tests, Vitest and Testing Library.** What a visitor
+actually does: each journey reaching a resolved outcome, every screen rendering
+standalone, PNR validation, the radio group's keyboard behaviour, the dialog's
+focus handling, and key and placeholder parity between the two dictionaries.
+
+**Layout and accessibility — 22 tests, Playwright against the production build.**
+jsdom performs no layout, so `getBoundingClientRect` returns zeros there and a
+misaligned heading or an invisible focus ring passes unnoticed. These run in a
+real browser at 375/768/1280 in both languages, and assert:
+
+- Confirmation headlines share a centre axis with the mark above them
+- No constrained block sits off-centre inside a centre-aligned container
+- Nothing overflows horizontally; paired cards end level and align their links
+- No heading or lead paragraph ends on a single word
+- Every text node meets WCAG AA contrast
+- A real Tab press produces a visible focus ring
+- Every control is at least 44px on a phone
+- Each route has one `h1` and skips no heading level
+
+Every one of these guards was verified by reverting the fix it covers and
+confirming the suite goes red.
 
 ## Architecture
 
