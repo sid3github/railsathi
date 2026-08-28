@@ -1,0 +1,51 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - button "RailSathi home" [ref=e5] [cursor=pointer]:
+      - generic [ref=e14]: RailSathi
+    - navigation [ref=e15]:
+      - button "My journey" [ref=e16] [cursor=pointer]
+      - button "How it works" [ref=e17] [cursor=pointer]
+      - button "Help centre" [ref=e18] [cursor=pointer]
+    - generic [ref=e19]:
+      - button "Change language" [ref=e20] [cursor=pointer]: EN
+      - button "Need help?" [ref=e25] [cursor=pointer]
+  - main [ref=e29]:
+    - generic [ref=e30]:
+      - generic [ref=e32]:
+        - heading [level=1] [ref=e33]:
+          - text: Travel plans change.
+          - emphasis [ref=e34]: Your certainty shouldn’t.
+        - paragraph [ref=e35]: A clear, personal plan for delays, cancellations and missed connections—before the confusion begins.
+        - generic [ref=e36]:
+          - generic [ref=e37]: Find your travel plan
+          - generic [ref=e38]:
+            - generic [ref=e39]:
+              - generic [ref=e40]: Enter a PNR
+              - textbox "PNR number" [ref=e41]: 8634 112 789
+            - button "View my plan" [ref=e42] [cursor=pointer]
+          - button "Use the demo journey" [ref=e45] [cursor=pointer]
+        - paragraph [ref=e48]: No login, password, OTP or payment details.
+      - generic [ref=e53]:
+        - generic [ref=e54]: MMCT
+        - generic [ref=e56]: NDLS
+        - generic [ref=e57]: Tonight · 1,384 km
+    - generic [ref=e58]:
+      - generic [ref=e59]:
+        - heading "One disruption. One clear next step." [level=2] [ref=e60]: One disruption.One clear next step.
+        - paragraph [ref=e61]: RailSathi translates uncertainty into a plan you can understand in a glance.
+      - generic [ref=e62]:
+        - article [ref=e63]:
+          - heading "Know what changed" [level=3] [ref=e64]
+          - paragraph [ref=e65]: Plain-language updates, not railway jargon.
+        - article [ref=e66]:
+          - heading "See the best path" [level=3] [ref=e67]
+          - paragraph [ref=e68]: Every option, cost and trade-off in one view.
+        - article [ref=e69]:
+          - heading "Leave with certainty" [level=3] [ref=e70]
+          - paragraph [ref=e71]: Rebook, follow a refund or share a travel plan.
+  - contentinfo [ref=e72]:
+    - generic [ref=e73]:
+      - text: Rail
+      - generic [ref=e82]: Sathi
+    - paragraph [ref=e83]: A clearer journey, from disruption to destination.
+    - generic [ref=e84]: Independent concept prototype · Not affiliated with Indian Railways or IRCTC

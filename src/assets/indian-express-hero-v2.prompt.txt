@@ -1,0 +1,11 @@
+Origin: Generated with the built-in OpenAI image generation tool on 2026-08-28.
+
+Use case: stylized-concept
+Asset type: premium travel-product website hero asset
+Primary request: Create an original, high-end editorial 3D render of a modern Indian intercity train, clearly inspired by the distinctive proportions and white-and-blue livery of a Vande Bharat-style Indian Railways train. It must look physically credible: aerodynamic white nose, large dark windshield, cobalt-blue side accents, warm interior windows, several connected coaches, correct railway bogies and track alignment.
+Scene/backdrop: transparent background, isolated train only; no station, people, sky, tracks, signs, logos, or surrounding scenery.
+Style/medium: refined product-render photography, clean minimal geometry, premium and contemporary—not cartoon, not flat vector illustration.
+Composition/framing: wide side-angle three-quarter view, train facing left, long enough to occupy the right half of a landing-page hero, space around the train, clean edge treatment.
+Lighting/mood: soft daylight with subtle realistic reflections, confident and calm.
+Color palette: ivory white body, deep navy-blue windows and trim, a restrained saffron accent line only if it feels authentic.
+Constraints: no text, no watermark, no logos, no government marks, no people, genuinely transparent alpha background. Avoid a green locomotive, generic Western high-speed train styling, toy-like proportions, and exaggerated sci-fi details.
