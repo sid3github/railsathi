@@ -2,17 +2,62 @@
 
 **A clear next step when an Indian rail journey is disrupted.**
 
-When a train is delayed or cancelled, the passenger is handed a status code and left
-to work out the rest. RailSathi translates that disruption into plain language, lays
-out the real choices with their trade-offs stated up front, and ends the journey with
-something concrete: a confirmed seat, a tracked refund, or a callback booked.
+**Live:** https://sid3github.github.io/railsathi/
+
+When a train is cancelled, the passenger is handed a status code and left to work
+out the rest — usually on a phone, on a platform, with a deadline. RailSathi
+translates that disruption into plain language, lays out the real choices with
+their trade-offs stated up front, and ends with something concrete: a confirmed
+seat, a tracked refund, or a callback booked.
 
 Built for the [Build What Moves India](https://buildwhatmovesindia.com) challenge.
 
-> **Independent concept prototype.** Not affiliated with, endorsed by, or connected to
-> Indian Railways or IRCTC. Every PNR, seat, fare, refund and support outcome in this
-> project is synthetic. The app never asks for a password, OTP, payment detail,
-> Aadhaar/PAN number, or any real government credential.
+> **Independent concept prototype.** Not affiliated with, endorsed by, or connected
+> to Indian Railways or IRCTC. Every PNR, seat, fare, refund and support outcome
+> here is synthetic. The app never asks for a password, OTP, payment detail,
+> Aadhaar/PAN number, or any real government credential — and there is no login, so
+> no demo credentials are needed to walk the whole journey.
+
+## The three journeys
+
+A disruption has more than one right answer, so all three paths complete:
+
+| Path | Route | Ends at |
+| --- | --- | --- |
+| Rebook onto another train | `/journey/rebook` | A confirmed seat and a refund tracker |
+| Take the fare back | `/journey/refund` | A tracked refund with expected dates |
+| Talk to someone | `/journey/callback` | A booked callback in the chosen language |
+
+Every screen is its own URL, so a plan can be shared and a deep link opens
+correctly on its own.
+
+## Design decisions worth knowing
+
+**Hindi is real, not a toggle.** All 178 strings are translated, the choice
+persists, and `<html lang>` follows it. `hi.ts` is typed as a complete
+`Dictionary`, so a missing key fails the build rather than falling back to
+English in front of someone who chose Hindi. Devanagari gets its own leading and
+tracking, because the Latin display setting crowds matras.
+
+**Built for a slow connection.** First load is ~209 kB. The hero is AVIF/WebP at
+two widths, so a phone pulls 22 kB rather than the 1.12 MB PNG this started with.
+Fonts are self-hosted, so no third-party origin sits in front of first paint. The
+Devanagari font only downloads if Hindi is actually chosen.
+
+**Accessible by measurement, not by assertion.** All 308 text nodes across nine
+routes clear WCAG AA contrast in both languages. Train selection is a real radio
+group with arrow-key support, the dialog traps and restores focus, every control
+has a 44 px touch target, and `prefers-reduced-motion` is honoured.
+
+**Nothing dead-ends.** No `alert()` stubs, no buttons that go nowhere. Sharing
+uses the platform share sheet with a clipboard fallback.
+
+## Built with Codex
+
+Codex wrote this prototype — the journey structure, the screens, the design
+system, and the synthetic data model. The hero illustration is original art
+generated with OpenAI's image tool; its prompt and provenance are kept alongside
+it in [`src/assets`](src/assets/indian-express-hero-v2.prompt.txt).
 
 ## Running locally
 
@@ -24,15 +69,38 @@ npm run dev
 | Script | What it does |
 | --- | --- |
 | `npm run dev` | Start the dev server |
+| `npm test` | Run the test suite |
 | `npm run build` | Type-check and build to `dist/` |
 | `npm run preview` | Serve the production build locally |
 | `npm run lint` | Run Oxlint |
+| `npm run images` | Regenerate the hero renditions from the source PNG |
+
+## Tests
+
+59 tests via Vitest and Testing Library, run in CI ahead of the build so a broken
+journey cannot deploy. They assert what a visitor actually does: each journey
+reaching a resolved outcome, every screen rendering standalone, PNR validation,
+the radio group's keyboard behaviour, the dialog's focus handling, and key and
+placeholder parity between the two dictionaries.
+
+## Architecture
+
+```
+src/
+  data/journey.ts     Synthetic trip, alternatives and refund stages
+  i18n/               en + hi dictionaries, provider, Intl formatters
+  state/              Journey choices, defaulted so deep links render
+  components/         Header, dialog, toast, tracker, share, error boundary
+  screens/            One file per screen
+  layouts/            Journey shell: header, progress, outlet
+  router.tsx          Route table (exported bare so tests can mount it)
+```
 
 ## Deployment
 
-Pushing to `main` builds and publishes to GitHub Pages via
+Pushing to `main` lints, tests, builds and publishes to GitHub Pages via
 [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
 
-Because Pages serves project sites from a subpath and has no SPA rewrite rule, the
-build emits `404.html` as a copy of `index.html` so deep links boot the router
+GitHub Pages serves project sites from a subpath and has no SPA rewrite rule, so
+the build emits `404.html` as a copy of `index.html` — deep links boot the router
 instead of 404ing. The subpath itself is set by `base` in `vite.config.ts`.
