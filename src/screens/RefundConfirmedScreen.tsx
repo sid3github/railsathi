@@ -17,7 +17,7 @@ export function RefundConfirmedScreen() {
       <h1>
         {t('refund.confirmed.title.line1')}
         <br />
-        <em>{t('refund.confirmed.title.line2', { name: trip.passengerName })}</em>
+        <em>{t('refund.confirmed.title.line2', { name: t('passenger.name') })}</em>
       </h1>
       <p className="confirmation-lead">{t('refund.confirmed.lead')}</p>
 

@@ -187,6 +187,8 @@ export const en = {
   'error.body': 'Reloading usually fixes it. Your journey details are not affected.',
   'error.cta': 'Reload the page',
 
+  'passenger.name': 'Anita',
+
   'station.MMCT': 'Mumbai Central',
   'station.NDLS': 'New Delhi',
   'train.12951': 'Mumbai Rajdhani',

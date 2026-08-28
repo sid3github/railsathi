@@ -34,7 +34,7 @@ export function RebookConfirmedScreen() {
       <h1>
         {t('confirmed.title.line1')}
         <br />
-        <em>{t('confirmed.title.line2', { name: trip.passengerName })}</em>
+        <em>{t('confirmed.title.line2', { name: t('passenger.name') })}</em>
       </h1>
       <p className="confirmation-lead">{t('confirmed.lead')}</p>
 

@@ -10,7 +10,7 @@ import { formatPnr, validatePnr } from '../lib/pnr'
 import { useJourney } from '../state/useJourney'
 
 export function HomeScreen() {
-  const { t } = useTranslation()
+  const { t, number } = useTranslation()
   const { setPnr } = useJourney()
   const navigate = useNavigate()
   const [value, setValue] = useState(formatPnr(trip.pnr))
@@ -96,7 +96,7 @@ export function HomeScreen() {
               <span>{trip.from}</span>
               <i />
               <span>{trip.to}</span>
-              <small>{t('format.tonightDistance', { km: trip.distanceKm.toLocaleString('en-IN') })}</small>
+              <small>{t('format.tonightDistance', { km: number(trip.distanceKm) })}</small>
             </div>
             <img className="hero-train" src={heroTrain} alt="" width={1774} height={887} />
           </div>

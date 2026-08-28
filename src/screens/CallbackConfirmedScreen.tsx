@@ -1,6 +1,5 @@
 import { ArrowLeft, ArrowRight, Check, Headphones, ShieldCheck } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { trip } from '../data/journey'
 import { useTranslation } from '../i18n/useTranslation'
 import { useJourney } from '../state/useJourney'
 
@@ -17,7 +16,7 @@ export function CallbackConfirmedScreen() {
       <h1>
         {t('callback.confirmed.title.line1')}
         <br />
-        <em>{t('callback.confirmed.title.line2', { name: trip.passengerName })}</em>
+        <em>{t('callback.confirmed.title.line2', { name: t('passenger.name') })}</em>
       </h1>
       <p className="confirmation-lead">{t('callback.confirmed.lead')}</p>
 
